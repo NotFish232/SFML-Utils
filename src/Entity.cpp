@@ -2,19 +2,35 @@
 #define ENTITY_CPP
 
 #include <SFML/Graphics.hpp>
+#include <functional>
 
 namespace sf {
 
 class Entity : public Sprite {
-private:
+protected:
     std::string m_name;
+    std::function<void(const std::string &)> m_signalCallback;
+
 public:
     virtual void input(const Event &event);
     virtual void process(float delta);
     virtual void fixedProcess();
     virtual void onCollision(const Entity &entity);
+    virtual void onSignal(const std::string &signal);
+
+    void sendSignal(const std::string &signal) {
+        m_signalCallback(signal);
+    }
+
+    void setSignalCallback(const std::function<void(const std::string &)> &func) {
+        m_signalCallback = func;
+    }
+
     const std::string &getName() const {
         return m_name;
+    }
+    void setName(const std::string &name) {
+        m_name = name;
     }
 };
 

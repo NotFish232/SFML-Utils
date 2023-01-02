@@ -10,8 +10,8 @@ namespace sf {
 class MainLoop {
 private:
     RenderWindow m_window;
-    std::vector<Entity> m_entities;
-    std::vector<Drawable> m_drawables;
+    std::vector<Entity *> m_entities;
+    std::vector<Drawable *> m_drawables;
     int m_fps;
 
 public:
@@ -19,21 +19,30 @@ public:
         : m_window(VideoMode(width, height), title) {
         m_fps = fps;
     }
-    void addEntity(const Entity &entity) {
-        m_entities.push_back(entity);
+
+    void addEntity(Entity &entity) {
+        using std::placeholders::_1;
+        entity.setSignalCallback(std::bind(&MainLoop::signalCallback, this, _1));
+        m_entities.push_back(&entity);
     }
 
-    void addDrawable(const Drawable &drawable) {
-        m_drawables.push_back(drawable);
+    void addDrawable(Drawable &drawable) {
+        m_drawables.push_back(&drawable);
+    }
+
+    void signalCallback(const std::string &signal) {
+        for (auto &entity: m_entities) {
+            entity->onSignal(signal);
+        }
     }
 
     void checkCollisions() {
         for (int i = 0; i < m_entities.size(); ++i) {
             for (int j = i + 1; j < m_entities.size(); ++j) {
-                Entity &entity1 = m_entities[i], &entity2 = m_entities[j];
-                if (entity1.getGlobalBounds().intersects(entity2.getGlobalBounds())) {
-                    entity1.onCollision(entity2);
-                    entity2.onCollision(entity1);
+                auto entity1 = m_entities[i], entity2 = m_entities[j];
+                if (entity1->getGlobalBounds().intersects(entity2->getGlobalBounds())) {
+                    entity1->onCollision(*entity2);
+                    entity2->onCollision(*entity1);
                 }
             }
         }
@@ -49,7 +58,7 @@ public:
                     m_window.close();
                 }
                 for (auto &entity : m_entities) {
-                    entity.input(event);
+                    entity->input(event);
                 }
             }
             checkCollisions();
@@ -57,23 +66,23 @@ public:
             float delta = (clock.getElapsedTime() - last_time).asSeconds();
             last_time = clock.getElapsedTime();
             for (auto &entity : m_entities) {
-                entity.process(delta);
+                entity->process(delta);
             }
 
             if (clock.getElapsedTime().asMilliseconds() > (1000 / m_fps)) {
                 last_time = Time();
                 clock.restart();
 
-                for (auto &entity: m_entities) {
-                    entity.fixedProcess();
+                for (auto &entity : m_entities) {
+                    entity->fixedProcess();
                 }
 
                 m_window.clear(Color::White);
                 for (const auto &drawable : m_drawables) {
-                    m_window.draw(drawable);
+                    m_window.draw(*drawable);
                 }
                 for (const auto &entity : m_entities) {
-                    m_window.draw(entity);
+                    m_window.draw(*entity);
                 }
 
                 m_window.display();
