@@ -1,8 +1,10 @@
-#ifndef BUTTON_CPP
-#define BUTTON_CPP
+#include "../include/Button.hpp"
 
-class Button {
+using namespace std;
+using namespace sf;
 
-};
+Button::Button() {
+}
 
-#endif
+Button::~Button() {
+}

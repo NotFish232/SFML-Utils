@@ -1,41 +1,56 @@
-#ifndef ENTITY_CPP
-#define ENTITY_CPP
+#include "../include/Entity.hpp"
 
-#include <SFML/Graphics.hpp>
-#include <functional>
+using namespace std;
+using namespace sf;
 
-namespace sf {
-
-class Entity : public Sprite {
-private:
-    std::string m_name;
-    std::function<void(const std::string &)> m_signalCallback;
-
-public:
-
-    virtual void input(const Event &event) = 0;
-    virtual void process(float delta) = 0;
-    virtual void fixedProcess() = 0;
-    virtual void onCollision(const Entity &entity) = 0;
-    virtual void onSignal(const std::string &signal) = 0;
-
-    void sendSignal(const std::string &signal) {
-        m_signalCallback(signal);
-    }
-
-    void setSignalCallback(const std::function<void(const std::string &)> &func) {
-        m_signalCallback = func;
-    }
-
-    const std::string &getName() const {
-        return m_name;
-    }
-
-    void setName(const std::string &name) {
-        m_name = name;
-    }
-};
-
+Entity::Entity() {
 }
 
-#endif
+Entity::~Entity() {
+}
+
+void Entity::sendSignal(const string &signal) {
+    m_signalCallback(signal);
+}
+
+void Entity::setName(const string &name) {
+    m_name = name;
+}
+
+void Entity::input(const Event &event) {
+}
+
+void Entity::process(float delta) {
+}
+
+void Entity::fixedProcess() {
+}
+
+void Entity::onCollision(const Entity &entity) {
+}
+
+void Entity::onSignal(const string &signal) {
+}
+
+const vector<FloatRect> Entity::getBounds() const {
+    return {getGlobalBounds()};
+}
+
+void Entity::setSignalCallback(const function<void(const string &)> &func) {
+    m_signalCallback = func;
+}
+
+const string &Entity::getName() const {
+    return m_name;
+}
+
+bool Entity::collidesWith(const Entity &other) const {
+    for (const auto &bound : getBounds()) {
+        for (const auto &other_bound : other.getBounds()) {
+            if (bound.intersects(other_bound)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}

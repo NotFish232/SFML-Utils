@@ -1,9 +1,9 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
-#include "src/Button.cpp"
-#include "src/Entity.cpp"
-#include "src/MainLoop.cpp"
-#include "src/TextField.cpp"
+#include "include/Button.hpp"
+#include "include/Entity.hpp"
+#include "include/MainLoop.hpp"
+#include "include/TextField.hpp"
 
 #endif
