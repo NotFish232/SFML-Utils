@@ -3,7 +3,8 @@
 using namespace std;
 using namespace sf;
 
-Entity::Entity() {
+Entity::Entity(bool visibility) {
+    m_visible = visibility;
 }
 
 Entity::~Entity() {
@@ -13,7 +14,7 @@ void Entity::init() {
     
 }
 
-void Entity::sendSignal(const string &signal) const {
+void Entity::emitSignal(const string &signal) const {
     m_signalCallback(signal);
 }
 
@@ -23,6 +24,14 @@ Entity *Entity::getEntity(const string &name) const {
 
 void Entity::setName(const string &name) {
     m_name = name;
+}
+
+void Entity::showEntity() {
+    m_visible = true;
+}
+
+void Entity::hideEntity() {
+    m_visible = false;
 }
 
 void Entity::input(const Event &event) {
@@ -38,6 +47,10 @@ void Entity::onCollision(const Entity &entity) {
 }
 
 void Entity::onSignal(const string &signal) {
+}
+
+bool Entity::isVisible() const {
+    return m_visible;
 }
 
 const vector<FloatRect> Entity::getBounds() const {

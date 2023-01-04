@@ -1,5 +1,5 @@
-#ifndef MAINLOOP_HPP
-#define MAINLOOP_HPP
+#ifndef GAMELOOP_HPP
+#define GAMELOOP_HPP
 
 #include "Entity.hpp"
 #include <SFML/Graphics.hpp>
@@ -7,7 +7,7 @@
 
 namespace sf {
 
-class MainLoop {
+class GameLoop {
 private:
     RenderWindow m_window;
     std::vector<Entity *> m_entities;
@@ -15,8 +15,8 @@ private:
     int m_fps;
 
 public:
-    MainLoop(const std::string &title, int width, int height, int fps);
-    ~MainLoop();
+    GameLoop(const std::string &title, int width, int height, int fps);
+    ~GameLoop();
 
     void addEntity(Entity &entity);
     void addDrawable(Drawable &drawable);
