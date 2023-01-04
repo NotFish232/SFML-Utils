@@ -15,6 +15,11 @@ inline Vector2<T> operator+(const Vector2<T> &left, const Vector2<U> &right) {
     return {left.x + right.x, left.y + right.y};
 }
 
+template <class T, class U>
+inline Vector2<T> operator-(const Vector2<T> &left, const Vector2<U> &right) {
+    return {left.x - right.x, left.y - right.y};
+}
+
 }
 
 #endif

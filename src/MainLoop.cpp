@@ -11,7 +11,7 @@ MainLoop::MainLoop(const string &title, int width, int height, int fps)
 MainLoop::~MainLoop() {
 }
 
-void MainLoop::MainLoop::addEntity(Entity &entity) {
+void MainLoop::addEntity(Entity &entity) {
     using placeholders::_1;
     entity.setSignalCallback(bind(&MainLoop::signalCallback, this, _1));
     entity.setGetEntityCallback(bind(&MainLoop::getEntityCallback, this, _1));
