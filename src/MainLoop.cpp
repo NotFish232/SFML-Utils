@@ -50,6 +50,10 @@ void MainLoop::checkCollisions() {
 }
 
 void MainLoop::run() {
+    for (const auto &entity : m_entities) {
+        entity->init();
+    }
+
     Clock clock;
     Time last_time;
     while (m_window.isOpen()) {

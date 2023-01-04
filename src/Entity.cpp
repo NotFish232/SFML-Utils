@@ -9,6 +9,10 @@ Entity::Entity() {
 Entity::~Entity() {
 }
 
+void Entity::init() {
+    
+}
+
 void Entity::sendSignal(const string &signal) const {
     m_signalCallback(signal);
 }

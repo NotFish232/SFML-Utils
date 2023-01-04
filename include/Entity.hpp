@@ -20,6 +20,7 @@ protected:
 public:
     Entity();
     ~Entity();
+    virtual void init();
     virtual void input(const Event &event);
     virtual void process(float delta);
     virtual void fixedProcess();
