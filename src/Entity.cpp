@@ -9,8 +9,12 @@ Entity::Entity() {
 Entity::~Entity() {
 }
 
-void Entity::sendSignal(const string &signal) {
+void Entity::sendSignal(const string &signal) const {
     m_signalCallback(signal);
+}
+
+Entity *Entity::getEntity(const string &name) const {
+    return m_getEntityCallback(name);
 }
 
 void Entity::setName(const string &name) {
@@ -38,6 +42,10 @@ const vector<FloatRect> Entity::getBounds() const {
 
 void Entity::setSignalCallback(const function<void(const string &)> &func) {
     m_signalCallback = func;
+}
+
+void Entity::setGetEntityCallback(const function<Entity *(const string &)> &func) {
+    m_getEntityCallback = func;
 }
 
 const string &Entity::getName() const {

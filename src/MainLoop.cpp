@@ -14,6 +14,7 @@ MainLoop::~MainLoop() {
 void MainLoop::MainLoop::addEntity(Entity &entity) {
     using placeholders::_1;
     entity.setSignalCallback(bind(&MainLoop::signalCallback, this, _1));
+    entity.setGetEntityCallback(bind(&MainLoop::getEntityCallback, this, _1));
     m_entities.push_back(&entity);
 }
 
@@ -21,10 +22,19 @@ void MainLoop::addDrawable(Drawable &drawable) {
     m_drawables.push_back(&drawable);
 }
 
-void MainLoop::signalCallback(const string &signal) {
+void MainLoop::signalCallback(const string &signal) const {
     for (auto &entity : m_entities) {
         entity->onSignal(signal);
     }
+}
+
+Entity *MainLoop::getEntityCallback(const string &name) const {
+    for (const auto &entity : m_entities) {
+        if (entity->getName() == name) {
+            return entity;
+        }
+    }
+    return nullptr;
 }
 
 void MainLoop::checkCollisions() {

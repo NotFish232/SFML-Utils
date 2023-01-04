@@ -10,9 +10,11 @@ class Entity : public sf::Sprite {
 private:
     std::string m_name;
     std::function<void(const std::string &)> m_signalCallback;
+    std::function<sf::Entity *(const std::string &)> m_getEntityCallback;
 
 protected:
-    void sendSignal(const std::string &signal);
+    void sendSignal(const std::string &signal) const;
+    sf::Entity* getEntity(const std::string &name) const;
     void setName(const std::string &name);
 
 public:
@@ -27,6 +29,7 @@ public:
 
     const std::string &getName() const;
     void setSignalCallback(const std::function<void(const std::string &)> &func);
+    void setGetEntityCallback(const std::function<sf::Entity *(const std::string &)> &func);
     bool collidesWith(const sf::Entity &other) const;
 };
 

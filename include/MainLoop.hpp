@@ -20,7 +20,8 @@ public:
 
     void addEntity(Entity &entity);
     void addDrawable(Drawable &drawable);
-    void signalCallback(const std::string &signal);
+    void signalCallback(const std::string &signal) const;
+    Entity *getEntityCallback(const std::string &name) const;
     void checkCollisions();
     void run();
 };
