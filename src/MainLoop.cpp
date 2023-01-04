@@ -23,7 +23,7 @@ void MainLoop::addDrawable(Drawable &drawable) {
 }
 
 void MainLoop::signalCallback(const string &signal) const {
-    for (auto &entity : m_entities) {
+    for (const auto &entity : m_entities) {
         entity->onSignal(signal);
     }
 }
@@ -62,7 +62,7 @@ void MainLoop::run() {
             if (event.type == Event::Closed) {
                 m_window.close();
             }
-            for (auto &entity : m_entities) {
+            for (const auto &entity : m_entities) {
                 entity->input(event);
             }
         }
@@ -70,7 +70,7 @@ void MainLoop::run() {
 
         float delta = (clock.getElapsedTime() - last_time).asSeconds();
         last_time = clock.getElapsedTime();
-        for (auto &entity : m_entities) {
+        for (const auto &entity : m_entities) {
             entity->process(delta);
         }
 
@@ -78,7 +78,7 @@ void MainLoop::run() {
             last_time = Time();
             clock.restart();
 
-            for (auto &entity : m_entities) {
+            for (const auto &entity : m_entities) {
                 entity->fixedProcess();
             }
 
