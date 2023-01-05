@@ -17,8 +17,8 @@ protected:
     void emitSignal(const std::string &signal) const;
     sf::Entity* getEntity(const std::string &name) const;
     void setName(const std::string &name);
-    virtual void showEntity();
-    virtual void hideEntity();
+    virtual void showSelf();
+    virtual void hideSelf();
 
 public:
     Entity(bool visibility = true);

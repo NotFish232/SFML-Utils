@@ -26,11 +26,11 @@ void Entity::setName(const string &name) {
     m_name = name;
 }
 
-void Entity::showEntity() {
+void Entity::showSelf() {
     m_visible = true;
 }
 
-void Entity::hideEntity() {
+void Entity::hideSelf() {
     m_visible = false;
 }
 

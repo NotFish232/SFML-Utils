@@ -78,7 +78,7 @@ void GameLoop::run() {
             }
         }
 
-        if (clock.getElapsedTime().asMilliseconds() > (1000 / m_fps)) {
+        if (clock.getElapsedTime().asMilliseconds() > 1000 / m_fps) {
             last_time = Time();
             clock.restart();
 
