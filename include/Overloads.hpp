@@ -11,6 +11,11 @@ inline Vector2<T> operator*(T num, const Vector2<U> &v) {
 }
 
 template <class T, class U>
+inline Vector2<T> operator/(const Vector2<T> &v, U num) {
+    return {v.x / num, v.y / num};
+}
+
+template <class T, class U>
 inline Vector2<T> operator+(const Vector2<T> &left, const Vector2<U> &right) {
     return {left.x + right.x, left.y + right.y};
 }

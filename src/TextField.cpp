@@ -32,6 +32,10 @@ TextField::TextField(const Vector2f &size) {
 TextField::~TextField() {
 }
 
+void TextField::setSize(const Vector2f &size) {
+    m_rect.setSize(size);
+}
+
 void TextField::setPosition(const Vector2f &position) {
     m_rect.setPosition(position);
     m_text.setPosition(position);
@@ -50,6 +54,10 @@ void TextField::setScale(const Vector2f &factors) {
 void TextField::setOrigin(const Vector2f &origin) {
     m_rect.setOrigin(origin);
     m_text.setOrigin(origin);
+}
+
+const Vector2f &TextField::getSize() const {
+    return m_rect.getSize();
 }
 
 const Vector2f &TextField::getPosition() const {

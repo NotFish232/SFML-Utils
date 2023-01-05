@@ -26,10 +26,13 @@ public:
     TextField(const Vector2f &size);
     ~TextField();
 
+    void setSize(const Vector2f &size);
     void setPosition(const Vector2f &position);
     void setRotation(float angle);
     void setScale(const Vector2f &factors);
     void setOrigin(const Vector2f &origin);
+    
+    const Vector2f &getSize() const;
     const Vector2f &getPosition() const;
     float getRotation() const;
     const Vector2f &getScale() const;
