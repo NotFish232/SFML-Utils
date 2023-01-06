@@ -11,7 +11,6 @@ Entity::~Entity() {
 }
 
 void Entity::init() {
-    
 }
 
 void Entity::emitSignal(const string &signal) const {

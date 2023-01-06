@@ -92,7 +92,8 @@ void Button::setFont(const Font &font) {
 
 void Button::setText(const string &text) {
     m_text.setString(text);
-    m_text.setOrigin({m_text.getLocalBounds().width / 2, m_text.getLocalBounds().height / 2});
+    auto floatRect = m_text.getLocalBounds();
+    m_text.setOrigin({floatRect.left + floatRect.width / 2, floatRect.top + floatRect.height / 2});
 }
 
 void Button::draw(RenderTarget &window, RenderStates states) const {
