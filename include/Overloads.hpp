@@ -25,6 +25,12 @@ inline Vector2<T> operator-(const Vector2<T> &left, const Vector2<U> &right) {
     return {left.x - right.x, left.y - right.y};
 }
 
+template <class T>
+inline std::ostream &operator<<(std::ostream &os, const Vector2<T> &vec) {
+    os << "{" << vec.x << ", " << vec.y << "}";
+    return os;
+}
+
 }
 
 #endif

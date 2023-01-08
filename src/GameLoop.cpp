@@ -41,6 +41,9 @@ void GameLoop::checkCollisions() {
     for (int i = 0; i < m_entities.size(); ++i) {
         for (int j = i + 1; j < m_entities.size(); ++j) {
             auto a = m_entities[i], b = m_entities[j];
+            if (!a->isVisible() || !b->isVisible()) {
+                continue;
+            }
             if (a->collidesWith(*b)) {
                 a->onCollision(*b);
                 b->onCollision(*a);
