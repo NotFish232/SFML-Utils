@@ -53,7 +53,7 @@ bool Entity::isVisible() const {
 }
 
 const vector<FloatRect> Entity::getBounds() const {
-    return {getGlobalBounds()};
+    return {};
 }
 
 void Entity::setSignalCallback(const function<void(const string &)> &func) {
