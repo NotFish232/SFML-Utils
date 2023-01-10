@@ -10,3 +10,6 @@ done
 
 
 ar crf "./lib/libsfml-utils.a" ./bin/*.o
+
+sudo cp -r include /usr/include/sfml-utils
+sudo cp lib/libsfml-utils.a /usr/lib/x86_64-linux-gnu/
