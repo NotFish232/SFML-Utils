@@ -8,4 +8,5 @@ for file in ./src/*; do
     g++ -c "$file" -o "./bin/$(basename $file .cpp).o"
 done
 
-ld -r ./bin/*.o -o ./bin/lib.o
+
+ar crf "./lib/libsfml-utils.a" ./bin/*.o

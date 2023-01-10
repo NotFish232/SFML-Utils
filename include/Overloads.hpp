@@ -31,6 +31,13 @@ inline std::ostream &operator<<(std::ostream &os, const Vector2<T> &vec) {
     return os;
 }
 
+template <class T>
+inline std::ostream &operator<<(std::ostream &os, const Rect<T> &rect) {
+    os << "(" << rect.left << ", " << rect.top << ") ";
+    os << rect.width << " x " << rect.height;
+    return os;
+}
+
 }
 
 #endif
